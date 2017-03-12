@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Geosprocket ways</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.33.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.33.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        .mapboxgl-ctrl-geocoder {
+          background-color: #222 !important;
+        }
+        .mapbox-directions-origin input[type='text'],
+        .mapbox-directions-destination input[type='text'] {
+          color: #fff !important;
+        }
+    </style>
+</head>
+<body>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css' type='text/css' />
+<div id='map'></div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibGFuZHBsYW5uZXIiLCJhIjoicUtlZGgwYyJ9.UFYz8MD4lI4kIzk9bjGFvg';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: {
+        "version": 8,
+        "sources": {
+            "raster-tiles": {
+                "type": "raster",
+                "url": "mapbox://landplanner.f505d476",
+                "tileSize": 256
+            }
+        },
+        "layers": [{
+            "id": "simple-tiles",
+            "type": "raster",
+            "source": "raster-tiles",
+            "minzoom": 0,
+            "maxzoom": 22
+        }]
+    },
+    center: [-73.453200, 43.328789], // starting position
+    zoom: 6 // starting zoom
+});
+
+map.addControl(new MapboxDirections({
+    accessToken: mapboxgl.accessToken
+}), 'top-left');
+</script>
+
+</body>
+</html>
